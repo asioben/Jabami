@@ -1,0 +1,14 @@
+[project]
+name = "yabami"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "pyaudio>=0.2.14",
+    "vosk>=0.3.44",
+]
+[tool.uv]
+required-environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'"
+]

@@ -1,0 +1,8 @@
+# Ignore Mac system files
+.DS_Store
+
+#credentials files
+credentials/
+
+#env
+.env
