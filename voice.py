@@ -1,8 +1,20 @@
 import pyaudio
 import json
 from vosk import Model, KaldiRecognizer
+import os
+import sys
+#import subprocess
 
-model = Model("/Users/user/Developer/vosk-model-en-us-0.22")
+command = "kitty -e echo \"Hello World\""
+os.system(command)
+sys.exit()
+
+with open("credentials/file.json","r") as file:
+            new_data = json.load(file)
+            print(new_data["English_Model_Vosk"])
+            #sys.exit()
+
+model = Model(new_data["English_Model_Vosk"])
 recognizer = KaldiRecognizer(model,16000)
 
 p = pyaudio.PyAudio()
@@ -15,6 +27,6 @@ while True:
     data = stream.read(4096, exception_on_overflow=False)
     if recognizer.AcceptWaveform(data):
         result = json.loads(recognizer.Result())
-        print("Beni:", result["text"])
+        print("Me:", result["text"])
         if(result["text"] == "stop"):
             break 

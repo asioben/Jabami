@@ -2,12 +2,24 @@ Step:
 
 1. Find a brain (LLM) with Ollama (for start) (IN DOING)
 2. Give it tools
-3. Loops
+3. Give it memory before loops?
 4. Maybe get a todo app ? (or made one?) (OPTIONAL)
 
-For step 1:
+
+---STEP 1---
 1. Install Ollama (DONE)
----LATER---
+
 2. Try a model 
+--Sub-subset for substep2--
+2,1. Find a model to Try (DONE)
+2,2. Test it on terminal and explore Ollama (DONE)
+---LATER---
+2,3. "Connect it" to voice.py ()
+-Sub-sub-subset for sub-substep 2,3
+2,3,1. Try to open a terminal with Python and write command
+2,3,2. Send voice transcription as command for the LLM
+
+---OTHER SUBSTEP---
 3. Try to set up a server to interact with the model (own computer)
+
 4. Test basic chatting with python scripts
