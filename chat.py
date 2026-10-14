@@ -1,17 +1,19 @@
 from ollama import chat
 
-model = "qwen3.5"
+def model_chat(role,prompt,model):
 
-print("Thinking...")
+    print("Thinking...")
 
-stream = chat(model=model,messages=[
-    {
-        "role": "user",
-        "content": "Explain Python iterator with a quick example"
-    }
-   ],
-   stream=True,
-)
+    stream = chat(model=model,messages=[
+        {
+            "role": role,
+            "content": prompt,
+        }
+      ],
+      stream=True,
+    )
 
-for chunk in stream:
-    print(chunk.message.content, end="",flush=True)
+    for chunk in stream:
+        print(chunk.message.content, end="",flush=True)
+    
+    return True
