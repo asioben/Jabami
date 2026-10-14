@@ -5,9 +5,9 @@ import os
 import sys
 #import subprocess
 
-command = "kitty -e echo \"Hello World\""
+"""command = "kitty -e echo \"Hello World\""
 os.system(command)
-sys.exit()
+sys.exit()"""
 
 with open("credentials/file.json","r") as file:
             new_data = json.load(file)

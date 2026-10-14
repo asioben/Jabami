@@ -17,6 +17,7 @@ Step:
 2,3. "Connect it" to voice.py ()
 -Sub-sub-subset for sub-substep 2,3
 2,3,1. Try to open a terminal with Python and write command
+(This is done by using a lib (ollama))
 2,3,2. Send voice transcription as command for the LLM
 
 ---OTHER SUBSTEP---
