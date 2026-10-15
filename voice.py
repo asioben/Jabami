@@ -7,7 +7,7 @@ class Voice:
             self.model = Model(model)
             self.recognizer = KaldiRecognizer(self.model,16000)
 
-      async def listen(self,decorator,stop_message,task):
+      def listen(self,decorator,stop_message,task):
             p = pyaudio.PyAudio()
             stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8192)
             stream.start_stream()
@@ -19,8 +19,8 @@ class Voice:
                     print(decorator, result["text"])
                     if result["text"] != "":
                       if result["text"] != stop_message:
-                       await task(result["text"])
-                       print("\nListening...")
-                    else:
-                        break
+                         task(result["text"])
+                         print("\nListening...")
+                      else:
+                         break
 
