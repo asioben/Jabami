@@ -34,3 +34,33 @@ def model_chat(model,thinking_mode,name,messages):
         print("HERE")
 
     return model_message
+
+def chat_with_memory():
+    print("Chat History with qwen3.5")
+    messages = [
+        {
+        'role': 'user',
+        'content': "Who are you",
+    },
+    {
+        'role': 'assistant',
+        'content': "I'm a chat assistant",
+    }
+    ]
+
+    while True:
+        user_input = input("\nMe: ")
+        if(user_input == 'stop'):
+            break
+        messages.append({'role': 'user', 'content': user_input})
+        stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
+        message = {'role': 'assistant', 'content': ""}
+        for chunk in stream:
+            message['content'] += chunk.message.content
+            print(chunk.message.content, end="", flush=True)
+
+        messages.append(message)
+    
+    print(messages)
+
+chat_with_memory()
