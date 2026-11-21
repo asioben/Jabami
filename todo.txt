@@ -17,10 +17,22 @@ Step:
 2,3. "Connect it" to voice.py ()
 -Sub-sub-subset for sub-substep 2,3
 2,3,1. Try to open a terminal with Python and write command
-(This is done by using a lib (ollama))
-2,3,2. Send voice transcription as command for the LLM
+(This is done by using a lib (ollama)) (DONE)
+2,3,2. Send voice transcription as command for the LLM (DONE)
 
 ---OTHER SUBSTEP---
 3. Try to set up a server to interact with the model (own computer)
+(KINDA DONE) In fact it's kinda done because I can access the model on my computer
 
 4. Test basic chatting with python scripts
+Before doing that, I sould do some things
+
+4.1 Add memory for chat
+
+---MEMORY---
+I was capable of giving him memory but the problems was that 
+it seems making him overthink sometimes (keep thinking without actually responding)
+For this step multiple things to do
+4.1.1: Try to solve the problem of the model only thinking (overthinking)
+4.1.2: Maybe change the voice model and interface
+4.1.3: Model needs a voice
