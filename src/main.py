@@ -1,5 +1,5 @@
 from chat import *
-from voice import Voice
+from speech_to_text import Voice
 import json
 
 def init_voice():
@@ -7,19 +7,6 @@ def init_voice():
             new_data = json.load(file)
     return new_data
 
-def chat_wrapper(prompt, messages):
-
-     message =  \
-     {
-          "role": "user",
-          "content":prompt
-     }
-
-     messages.append(message)
-
-     messages = chat_with_memory(messages, "AI: ")
-     
-     return messages
 
 def main():
     #Init

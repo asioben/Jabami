@@ -18,3 +18,17 @@ def chat_with_memory(messages, decorator):
     return messages
 
 #chat_with_memory()
+
+def chat_wrapper(prompt, messages):
+
+     message =  \
+     {
+          "role": "user",
+          "content":prompt
+     }
+
+     messages.append(message)
+
+     messages = chat_with_memory(messages, "AI: ")
+     
+     return messages
