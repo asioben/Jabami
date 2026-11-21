@@ -1,20 +1,13 @@
-from chat import model_chat
+from chat import *
 from voice import Voice
 import json
-#import asyncio
-
-SYSTEM = \
-     {
-            "role": "system",
-            "content": "You are a bored assistant. You provide short answers and dont think too much.",
-     }
 
 def init_voice():
     with open("../credentials/file.json","r") as file:
             new_data = json.load(file)
     return new_data
 
-def chat_wrapper(prompt,messages,model_message):
+def chat_wrapper(prompt, messages):
 
      message =  \
      {
@@ -22,22 +15,11 @@ def chat_wrapper(prompt,messages,model_message):
           "content":prompt
      }
 
-     if(len(messages) == 0):
-          messages.append(SYSTEM)
-          messages.append(message)
-     else:
-          #print(model_message)
-          messages.append(message)
-          messages.append(model_message)
-    
-     model_message = None
+     messages.append(message)
 
-     while model_message == None:    
-        model_message = model_chat(model="qwen3.5",
-                       thinking_mode=True,name="\nAI: ",
-                        messages=messages)
-
-     return model_message
+     messages = chat_with_memory(messages, "AI: ")
+     
+     return messages
 
 def main():
     #Init
@@ -45,8 +27,15 @@ def main():
     voice_object = Voice(voice_model["English_Model_Vosk"])
 
     #Vosk
+    print("Chat History with qwen3.5")
     print("\nListening...")
-    messages = []
+    messages = [
+     {
+          "role": "system",
+          "content": "You are a chatbot who answers quickly",
+     }
+
+     ]
     voice_object.listen("Me:","stop",messages,chat_wrapper)
 
 

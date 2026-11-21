@@ -1,66 +1,20 @@
 from ollama import chat
 
-def model_chat(model,thinking_mode,name,messages):
+#def model_chat(model,thinking_mode,name,messages):
 
-    stream = chat(model=model,
-            messages=messages,
-      stream=True,
-      #think=thinking_level,
-    )
-
-    print("Thinking...")
-    first_time = False
-
-    model_message = {
-        "role": "assistant",
-        "content": ""
-    }
-
-
+def chat_with_memory(messages, decorator):
+    #user_input = input("\nMe: ")
+    #messages.append({'role': 'user', 'content': user_input})
+    stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
+    message = {'role': 'assistant', 'content': decorator}
     for chunk in stream:
-        if(thinking_mode and chunk.message.thinking):
-            #print(";",end="")
-            print(chunk.message.thinking,end="", flush=True)
-        if chunk.message.content:
-          #print(":",end="")
-          if(first_time == False):
-              first_time = True
-              print(name)
-          model_message["content"] += chunk.message.content
-          print(chunk.message.content, end="",flush=True)
+        message['content'] += chunk.message.content
+        print(chunk.message.content, end="", flush=True)
+
+    messages.append(message)
     
-    if(model_message["content"] == ""):
-        model_message = None
-        print("HERE")
+    #print(messages)
 
-    return model_message
+    return messages
 
-def chat_with_memory():
-    print("Chat History with qwen3.5")
-    messages = [
-        {
-        'role': 'user',
-        'content': "Who are you",
-    },
-    {
-        'role': 'assistant',
-        'content': "I'm a chat assistant",
-    }
-    ]
-
-    while True:
-        user_input = input("\nMe: ")
-        if(user_input == 'stop'):
-            break
-        messages.append({'role': 'user', 'content': user_input})
-        stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
-        message = {'role': 'assistant', 'content': ""}
-        for chunk in stream:
-            message['content'] += chunk.message.content
-            print(chunk.message.content, end="", flush=True)
-
-        messages.append(message)
-    
-    print(messages)
-
-chat_with_memory()
+#chat_with_memory()
