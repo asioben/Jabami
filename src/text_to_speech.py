@@ -1,9 +1,10 @@
 from RealtimeTTS import QwenCpuEngine, QwenVoice, TextToAudioStream
 
-def test():
+"""def test():
     yield "here"
     yield "I am"
     yield "forever"
+"""
 
 class Speech:
     def __init__(self, name, ref_audio, ref_text, language):
@@ -13,15 +14,15 @@ class Speech:
             ref_text= ref_text,
             language= language,
         )
+        self.engine = QwenCpuEngine(voice=self.voice)
+        self.stream = TextToAudioStream(self.engine)
     
     def speak(self, yielder):
-        engine = QwenCpuEngine(voice=self.voice)
-        try:
-            stream = TextToAudioStream(engine)
-            stream.feed(yielder())
-            stream.play()
-        finally:
-            engine.shutdown()
+        self.stream.feed(yielder)
+        self.stream.play()
 
-speech = Speech("assistant","../en_female.wav","The exact words spoken in reference.wav.","english")
-speech.speak(test)
+    def destroy(self):
+        self.engine.shutdown()
+
+"""speech = Speech("assistant","../en_female.wav","The exact words spoken in reference.wav.","english")
+speech.speak(test)"""
