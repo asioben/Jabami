@@ -13,6 +13,13 @@ from ollama import chat
 
 """
 
+def chat_streamer(messages):
+      stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
+      for chunk in stream:
+          #message_assistant["content"] += chunk.message.content
+          print(chunk.message.content, end="", flush="True")
+          yield chunk.message.content
+
 def chat_wrapper(prompt, messages, speech):
 
      message_user =  \
@@ -25,15 +32,8 @@ def chat_wrapper(prompt, messages, speech):
 
      print("\nAI:", end="", flush="True")
      message_assistant = {'role': 'assistant', 'content': ""}
-     stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
-     for chunk in stream:
-          message_assistant["content"] += chunk.message.content
-          print(chunk.message.content, end="", flush="True")
-     
-     stream_speech = message_assistant["content"]
-     stream_speech = iter(stream_speech)
 
-     speech.speak(stream_speech)
+     speech.speak(chat_streamer,messages)
      messages.append(message_assistant)
      
      return messages

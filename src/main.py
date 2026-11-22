@@ -15,7 +15,7 @@ def main():
     voice_object = Voice(voice_model["English_Model_Vosk"])
 
     #Init speech
-    speech_objetct = Speech("assistant","../en_female.wav","The exact words spoken in reference.wav.","english")
+    speech_objetct = Speech("assistant","../credentials/en_female.wav","The exact words spoken in reference.wav.","english")
 
     #Vosk
     print("Chat History with qwen3.5")

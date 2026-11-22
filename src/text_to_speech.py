@@ -1,4 +1,5 @@
 from RealtimeTTS import QwenCpuEngine, QwenVoice, TextToAudioStream
+import logging
 
 """def test():
     yield "here"
@@ -15,10 +16,10 @@ class Speech:
             language= language,
         )
         self.engine = QwenCpuEngine(voice=self.voice)
-        self.stream = TextToAudioStream(self.engine)
+        self.stream = TextToAudioStream(self.engine, level=logging.ERROR)
     
-    def speak(self, yielder):
-        self.stream.feed(yielder)
+    def speak(self, yielder, messages):
+        self.stream.feed(yielder(messages))
         self.stream.play()
 
     def destroy(self):
