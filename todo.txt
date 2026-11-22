@@ -4,35 +4,56 @@ Step:
 2. Give it tools
 3. Give it memory before loops?
 4. Maybe get a todo app ? (or made one?) (OPTIONAL)
+5. Create an interface
 
-
----STEP 1---
+---BEGIN---
 1. Install Ollama (DONE)
+---END---
 
+---BEGIN
 2. Try a model 
---Sub-subset for substep2--
+--Substep 2--
 2,1. Find a model to Try (DONE)
 2,2. Test it on terminal and explore Ollama (DONE)
----LATER---
 2,3. "Connect it" to voice.py ()
--Sub-sub-subset for sub-substep 2,3
+-SubsubStep 2,3-
 2,3,1. Try to open a terminal with Python and write command
 (This is done by using a lib (ollama)) (DONE)
 2,3,2. Send voice transcription as command for the LLM (DONE)
+---END---
 
----OTHER SUBSTEP---
+
+---BEGIN---
 3. Try to set up a server to interact with the model (own computer)
 (KINDA DONE) In fact it's kinda done because I can access the model on my computer
+---END---
 
+
+---BEGIN---
 4. Test basic chatting with python scripts
 Before doing that, I sould do some things
-
+--Substep 4--
 4.1 Add memory for chat
-
----MEMORY---
+-MEMORY-
 I was capable of giving him memory but the problems was that 
 it seems making him overthink sometimes (keep thinking without actually responding)
 For this step multiple things to do
-4.1.1: Try to solve the problem of the model only thinking (overthinking)
-4.1.2: Maybe change the voice model and interface
+4.1.1: Try to solve the problem of the model only thinking (DONE)
+Solved, and it's smooth. I can for later make the function more clean and add some functionality but for the moment it's good enough
+4.1.2: Maybe change the voice model and interface???????
 4.1.3: Model needs a voice
+I'll go look for a way to answer with its own voice and also give her a new interface
+-ABOUT THE VOICE-
+-I found some promising options. I could use RealTimeTTS for its streaming advantage
+-Finally I used RealTimetts for the stream and qwen as the voice engine
+-Due to the verbosity of these speech/voice tools, I think I need to make a dashboard
+-We can say we are done with that
+---END---
+
+ ====================EVERYTHING UP IS DONE====================
+
+ ====================TO DO====================
+5.Create an interface for the chat/avatar
+This is a huge step, I need to go look for a convenable and smooth gui python library 
+
+5.1 Find 
