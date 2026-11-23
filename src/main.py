@@ -27,7 +27,12 @@ def main():
      }
 
      ]
-    voice_object.listen("Me:","stop",messages,chat_wrapper,speech_objetct)
+    voice_object.init_streaming()
+    loop = True
+    while loop:
+        loop, prompt = voice_object.listen("Me:","stop")
+        if(len(prompt) != 0):
+            chat_wrapper(prompt,messages,speech_objetct)
     speech_objetct.destroy()
 
 if __name__ == "__main__":
