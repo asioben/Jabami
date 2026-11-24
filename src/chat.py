@@ -1,26 +1,15 @@
 from ollama import chat
 
-#def model_chat(model,thinking_mode,name,messages):
-
-"""def chat_with_memory(messages):
-    #user_input = input("\nMe: ")
-    #messages.append({'role': 'user', 'content': user_input})
-    stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
-    for chunk in stream:
-        #message['content'] += chunk.message.content
-        yield chunk.message.content
-        print(chunk.message.content, end="", flush=True)
-
-"""
-
-def chat_streamer(messages):
+def chat_streamer(messages, speech_flag):
       stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
       for chunk in stream:
-          #message_assistant["content"] += chunk.message.content
+          messages[-1]["content"] += chunk.message.content
           print(chunk.message.content, end="", flush="True")
-          yield chunk.message.content
+          if speech_flag:
+            yield chunk.message.content
 
-def chat_wrapper(prompt, messages, speech):
+
+def chat_wrapper(prompt, messages, speech_object, speech_flag):
 
      message_user =  \
      {
@@ -32,8 +21,12 @@ def chat_wrapper(prompt, messages, speech):
 
      print("\nAI:", end="", flush="True")
      message_assistant = {'role': 'assistant', 'content': ""}
-
-     speech.speak(chat_streamer,messages)
      messages.append(message_assistant)
+
+     if speech_flag:
+        speech_object.speak(chat_streamer,messages)
+     else:
+          for i in chat_streamer(messages, speech_flag):
+              pass
      
      return messages

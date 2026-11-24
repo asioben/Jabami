@@ -23,21 +23,3 @@ class Voice:
                         self.stream.stop_stream()
                         return False, ""
             return True, text
-      
-            """p = pyaudio.PyAudio()
-            stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8192)
-            stream.start_stream()
-            result = {"text": ""}
-            while True:
-                data = stream.read(4096, exception_on_overflow=False)
-                if self.recognizer.AcceptWaveform(data):
-                    result = json.loads(self.recognizer.Result())
-                    print(decorator, result["text"])
-                    if len(result["text"]) > 0:
-                      if result["text"] != stop_message:
-                         messages = task(result["text"],messages, speech)
-                         #print(model_message)
-                         #print("\n",messages)
-                         print("\nListening...")
-                      else:
-                         break"""
