@@ -8,7 +8,7 @@ from text_to_speech import Speech
 
 #LISTEN_INPUT: Flag for inputing 
 #False for inputing, True for listening
-LISTEN_INPUT = True
+LISTEN_INPUT = False
 
 #SPEECH: Activate the model to speak
 #False for none, True for speech
@@ -41,15 +41,24 @@ def main():
      }
 
      ]
-    voice_object.init_streaming()
+    if(LISTEN_INPUT):    
+          voice_object.init_streaming()
+
+     
     loop = True
+    stop_message = 'b'
+    decorator = '\nMe:'
     while loop:
          if(LISTEN_INPUT):
-              loop, prompt = voice_object.listen("\nMe:","b")
+              loop, prompt = voice_object.listen(decorator,stop_message)
               if(len(prompt) != 0):
                     chat_wrapper(prompt,messages,speech_object,SPEECH)
          else:
-              chat_wrapper(prompt,messages,None,False)
+              prompt = input(decorator)
+              if prompt != stop_message:
+                    chat_wrapper(prompt,messages,None,False)
+              else:
+                   loop = False
               
     if SPEECH:
           speech_object.destroy()
