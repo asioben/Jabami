@@ -1,7 +1,7 @@
 from ollama import chat
 
-def chat_streamer(messages, speech_flag):
-      stream = chat(model="qwen3.5", messages=messages, stream=True,think=False)
+def chat_streamer(messages, speech_flag, model):
+      stream = chat(model=model, messages=messages, stream=True,think=False)
       for chunk in stream:
           messages[-1]["content"] += chunk.message.content
           print(chunk.message.content, end="", flush="True")
@@ -9,7 +9,7 @@ def chat_streamer(messages, speech_flag):
             yield chunk.message.content
 
 
-def chat_wrapper(prompt, messages, speech_object, speech_flag):
+def chat_wrapper(prompt, messages, speech_object, speech_flag, model):
 
      message_user =  \
      {
@@ -24,9 +24,9 @@ def chat_wrapper(prompt, messages, speech_object, speech_flag):
      messages.append(message_assistant)
 
      if speech_flag:
-        speech_object.speak(chat_streamer,messages)
+        speech_object.speak(chat_streamer,messages, model)
      else:
-          for i in chat_streamer(messages, speech_flag):
+          for i in chat_streamer(messages, speech_flag, model):
               pass
      
      return messages

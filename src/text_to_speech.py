@@ -13,8 +13,8 @@ class Speech:
         self.engine = QwenCpuEngine(voice=self.voice)
         self.stream = TextToAudioStream(self.engine, level=logging.ERROR)
     
-    def speak(self, yielder, messages):
-        self.stream.feed(yielder(messages, True))
+    def speak(self, yielder, messages, model):
+        self.stream.feed(yielder(messages, True, model))
         self.stream.play()
 
     def destroy(self):

@@ -8,11 +8,13 @@ from text_to_speech import Speech
 
 #LISTEN_INPUT: Flag for inputing 
 #False for inputing, True for listening
-LISTEN_INPUT = False
+LISTEN_INPUT = True
 
 #SPEECH: Activate the model to speak
 #False for none, True for speech
-SPEECH = False
+SPEECH = True
+
+MODEL = "mistral"
 
 def init_voice():
     with open("../credentials/file.json","r") as file:
@@ -32,12 +34,12 @@ def main():
           speech_object = Speech("assistant","../credentials/en_female.wav","The exact words spoken in reference.wav.","english")
 
     #Vosk
-    print("Chat History with qwen3.5")
+    print("Chat History with", MODEL)
     print("\nListening...")
     messages = [
      {
           "role": "system",
-          "content": "You are a chatbot who answers quickly. You don't take time thinking except if you are asked to do so.",
+          "content": "You are a chatbot who answers quickly. You don't talk too mcuh except if you'are asked to do it.",
      }
 
      ]
@@ -52,11 +54,11 @@ def main():
          if(LISTEN_INPUT):
               loop, prompt = voice_object.listen(decorator,stop_message)
               if(len(prompt) != 0):
-                    chat_wrapper(prompt,messages,speech_object,SPEECH)
+                    chat_wrapper(prompt,messages,speech_object,SPEECH,MODEL)
          else:
               prompt = input(decorator)
               if prompt != stop_message:
-                    chat_wrapper(prompt,messages,None,False)
+                    chat_wrapper(prompt,messages,None,False,MODEL)
               else:
                    loop = False
               
